@@ -29,55 +29,292 @@
       "type": "youtube_channel",
       "url": "https://www.youtube.com/@DataDrivenNYC/videos",
       "channelHandle": "DataDrivenNYC"
-    },
-    {
-      "name": "AI & I by Every",
-      "type": "youtube_playlist",
-      "url": "https://www.youtube.com/playlist?list=PLuMcoKK9mKgHtW_o9h5sGO2vXrffKHwJL",
-      "playlistId": "PLuMcoKK9mKgHtW_o9h5sGO2vXrffKHwJL"
-    }
-  ],
-  "blogs": [
-    {
-      "name": "Anthropic Engineering",
-      "type": "scrape",
-      "indexUrl": "https://www.anthropic.com/engineering",
-      "articleBaseUrl": "https://www.anthropic.com/engineering/",
-      "fetchMethod": "http"
-    },
-    {
-      "name": "Claude Blog",
-      "type": "scrape",
-      "indexUrl": "https://claude.com/blog",
-      "articleBaseUrl": "https://claude.com/blog/",
-      "fetchMethod": "http"
     }
   ],
   "x_accounts": [
-    { "name": "Andrej Karpathy", "handle": "karpathy" },
-    { "name": "Swyx", "handle": "swyx" },
-    { "name": "Josh Woodward", "handle": "joshwoodward" },
-    { "name": "Kevin Weil", "handle": "kevinweil" },
-    { "name": "Peter Yang", "handle": "petergyang" },
-    { "name": "Nan Yu", "handle": "thenanyu" },
-    { "name": "Madhu Guru", "handle": "realmadhuguru" },
-    { "name": "Amanda Askell", "handle": "AmandaAskell" },
-    { "name": "Cat Wu", "handle": "_catwu" },
-    { "name": "Thariq", "handle": "trq212" },
-    { "name": "Google Labs", "handle": "GoogleLabs" },
-    { "name": "Amjad Masad", "handle": "amasad" },
-    { "name": "Guillermo Rauch", "handle": "rauchg" },
-    { "name": "Alex Albert", "handle": "alexalbert__" },
-    { "name": "Aaron Levie", "handle": "levie" },
-    { "name": "Ryo Lu", "handle": "ryolu_" },
-    { "name": "Garry Tan", "handle": "garrytan" },
-    { "name": "Matt Turck", "handle": "mattturck" },
-    { "name": "Zara Zhang", "handle": "zarazhangrui" },
-    { "name": "Nikunj Kothari", "handle": "nikunj" },
-    { "name": "Peter Steinberger", "handle": "steipete" },
-    { "name": "Dan Shipper", "handle": "danshipper" },
-    { "name": "Aditya Agarwal", "handle": "adityaag" },
-    { "name": "Sam Altman", "handle": "sama" },
-    { "name": "Claude", "handle": "claudeai" }
+    {
+      "name": "Andrej Karpathy",
+      "handle": "karpathy"
+    },
+    {
+      "name": "Swyx",
+      "handle": "swyx"
+    },
+    {
+      "name": "Josh Woodward",
+      "handle": "joshwoodward"
+    },
+    {
+      "name": "Kevin Weil",
+      "handle": "kevinweil"
+    },
+    {
+      "name": "Peter Yang",
+      "handle": "petergyang"
+    },
+    {
+      "name": "Nan Yu",
+      "handle": "thenanyu"
+    },
+    {
+      "name": "Madhu Guru",
+      "handle": "realmadhuguru"
+    },
+    {
+      "name": "Amanda Askell",
+      "handle": "AmandaAskell"
+    },
+    {
+      "name": "Cat Wu",
+      "handle": "_catwu"
+    },
+    {
+      "name": "Thariq",
+      "handle": "trq212"
+    },
+    {
+      "name": "Google Labs",
+      "handle": "GoogleLabs"
+    },
+    {
+      "name": "Amjad Masad",
+      "handle": "amasad"
+    },
+    {
+      "name": "Guillermo Rauch",
+      "handle": "rauchg"
+    },
+    {
+      "name": "Alex Albert",
+      "handle": "alexalbert__"
+    },
+    {
+      "name": "Aaron Levie",
+      "handle": "levie"
+    },
+    {
+      "name": "Ryo Lu",
+      "handle": "ryolu_"
+    },
+    {
+      "name": "Garry Tan",
+      "handle": "garrytan"
+    },
+    {
+      "name": "Matt Turck",
+      "handle": "mattturck"
+    },
+    {
+      "name": "Zara Zhang",
+      "handle": "zarazhangrui"
+    },
+    {
+      "name": "Nikunj Kothari",
+      "handle": "nikunj"
+    },
+    {
+      "name": "Peter Steinberger",
+      "handle": "steipete"
+    },
+    {
+      "name": "Dan Shipper",
+      "handle": "danshipper"
+    },
+    {
+      "name": "Aditya Agarwal",
+      "handle": "adityaag"
+    },
+    {
+      "name": "Sam Altman",
+      "handle": "sama"
+    },
+    {
+      "name": "Claude",
+      "handle": "claudeai"
+    },
+    {
+      "name": "Noam Brown",
+      "handle": "noamzbrown"
+    },
+    {
+      "name": "John Schulman",
+      "handle": "johnschulman2"
+    },
+    {
+      "name": "Lilian Weng",
+      "handle": "lilianweng"
+    },
+    {
+      "name": "Wojciech Zaremba",
+      "handle": "woj_zaremba"
+    },
+    {
+      "name": "Demis Hassabis",
+      "handle": "DemisHassabis"
+    },
+    {
+      "name": "Jeff Dean",
+      "handle": "JeffDean"
+    },
+    {
+      "name": "Oriol Vinyals",
+      "handle": "OriolVinyalsML"
+    },
+    {
+      "name": "Nando de Freitas",
+      "handle": "NandoDF"
+    },
+    {
+      "name": "David Silver",
+      "handle": "davidsilveruk"
+    },
+    {
+      "name": "Yann LeCun",
+      "handle": "ylecun"
+    },
+    {
+      "name": "Joelle Pineau",
+      "handle": "jpineau1"
+    },
+    {
+      "name": "Dario Amodei",
+      "handle": "darioamodei"
+    },
+    {
+      "name": "Jack Clark",
+      "handle": "jackclarksf"
+    },
+    {
+      "name": "Satya Nadella",
+      "handle": "satyanadella"
+    },
+    {
+      "name": "Mustafa Suleyman",
+      "handle": "mustafasuleyman"
+    },
+    {
+      "name": "Sebastien Bubeck",
+      "handle": "SebastienBubeck"
+    },
+    {
+      "name": "Jim Fan",
+      "handle": "DrJimFan"
+    },
+    {
+      "name": "Ilya Sutskever",
+      "handle": "ilyasut"
+    },
+    {
+      "name": "Geoffrey Hinton",
+      "handle": "geoffreyhinton"
+    },
+    {
+      "name": "Yannic Kilcher",
+      "handle": "ykilcher"
+    },
+    {
+      "name": "Simon Willison",
+      "handle": "simonw"
+    },
+    {
+      "name": "Harrison Chase",
+      "handle": "hwchase17"
+    },
+    {
+      "name": "Jerry Liu",
+      "handle": "jerryjliu0"
+    },
+    {
+      "name": "Tri Dao",
+      "handle": "tri_dao"
+    },
+    {
+      "name": "Thomas Wolf",
+      "handle": "Thom_Wolf"
+    },
+    {
+      "name": "Clement Delangue",
+      "handle": "ClementDelangue"
+    },
+    {
+      "name": "Fei-Fei Li",
+      "handle": "drfeifei"
+    },
+    {
+      "name": "Percy Liang",
+      "handle": "percyliang"
+    },
+    {
+      "name": "Ethan Mollick",
+      "handle": "emollick"
+    },
+    {
+      "name": "Andrew Ng",
+      "handle": "AndrewYNg"
+    },
+    {
+      "name": "Lex Fridman",
+      "handle": "lexfridman"
+    },
+    {
+      "name": "Ben's Bites",
+      "handle": "bensbitesdaily"
+    },
+    {
+      "name": "The Rundown AI",
+      "handle": "TheRundownAI"
+    },
+    {
+      "name": "Latent Space",
+      "handle": "latentspacepod"
+    },
+    {
+      "name": "a16z",
+      "handle": "a16z"
+    },
+    {
+      "name": "Emad Mostaque",
+      "handle": "EMostaque"
+    },
+    {
+      "name": "Aravind Srinivas",
+      "handle": "AravSrinivas"
+    },
+    {
+      "name": "Chamath Palihapitiya",
+      "handle": "chamath"
+    },
+    {
+      "name": "Reid Hoffman",
+      "handle": "reidhoffman"
+    },
+    {
+      "name": "Naval",
+      "handle": "naval"
+    },
+    {
+      "name": "The Information",
+      "handle": "theinformation"
+    },
+    {
+      "name": "Financial Times",
+      "handle": "FT"
+    },
+    {
+      "name": "Bloomberg",
+      "handle": "business"
+    },
+    {
+      "name": "Reuters",
+      "handle": "Reuters"
+    },
+    {
+      "name": "Shunyu Yao",
+      "handle": "ShunyuYao14"
+    },
+    {
+      "name": "Junyang Lin",
+      "handle": "JustinLin610"
+    }
   ]
 }

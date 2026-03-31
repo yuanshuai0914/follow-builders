@@ -16,25 +16,26 @@
 // Output: JSON to stdout
 // ============================================================================
 
-import { readFile, mkdir } from 'fs/promises';
+import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 
 // -- Constants ---------------------------------------------------------------
 
+const SCRIPT_DIR = decodeURIComponent(new URL('.', import.meta.url).pathname);
 const USER_DIR = join(homedir(), '.follow-builders');
 const CONFIG_PATH = join(USER_DIR, 'config.json');
 
+const LOCAL_FEED_X_PATH = join(SCRIPT_DIR, '..', 'feed-x.json');
+const LOCAL_FEED_PODCASTS_PATH = join(SCRIPT_DIR, '..', 'feed-podcasts.json');
 const FEED_X_URL = 'https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json';
 const FEED_PODCASTS_URL = 'https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-podcasts.json';
-const FEED_BLOGS_URL = 'https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-blogs.json';
 
 const PROMPTS_BASE = 'https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/prompts';
 const PROMPT_FILES = [
   'summarize-podcast.md',
   'summarize-tweets.md',
-  'summarize-blogs.md',
   'digest-intro.md',
   'translate.md'
 ];
@@ -45,6 +46,15 @@ async function fetchJSON(url) {
   const res = await fetch(url);
   if (!res.ok) return null;
   return res.json();
+}
+
+async function readLocalJSON(path) {
+  if (!existsSync(path)) return null;
+  try {
+    return JSON.parse(await readFile(path, 'utf-8'));
+  } catch {
+    return null;
+  }
 }
 
 async function fetchText(url) {
@@ -72,16 +82,27 @@ async function main() {
     }
   }
 
-  // 2. Fetch all three feeds
-  const [feedX, feedPodcasts, feedBlogs] = await Promise.all([
-    fetchJSON(FEED_X_URL),
-    fetchJSON(FEED_PODCASTS_URL),
-    fetchJSON(FEED_BLOGS_URL)
-  ]);
+  // 2. Load feeds (priority: local file > remote GitHub)
+  let feedX = await readLocalJSON(LOCAL_FEED_X_PATH);
+  let feedPodcasts = await readLocalJSON(LOCAL_FEED_PODCASTS_PATH);
 
-  if (!feedX) errors.push('Could not fetch tweet feed');
-  if (!feedPodcasts) errors.push('Could not fetch podcast feed');
-  if (!feedBlogs) errors.push('Could not fetch blog feed');
+  if (!feedX) {
+    feedX = await fetchJSON(FEED_X_URL);
+    if (!feedX) {
+      errors.push('Could not load tweet feed (local + remote failed)');
+    } else {
+      errors.push('Tweet feed loaded from remote fallback (local missing/unreadable)');
+    }
+  }
+
+  if (!feedPodcasts) {
+    feedPodcasts = await fetchJSON(FEED_PODCASTS_URL);
+    if (!feedPodcasts) {
+      errors.push('Could not load podcast feed (local + remote failed)');
+    } else {
+      errors.push('Podcast feed loaded from remote fallback (local missing/unreadable)');
+    }
+  }
 
   // 3. Load prompts with priority: user custom > remote (GitHub) > local default
   //
@@ -90,8 +111,7 @@ async function main() {
   // Otherwise, fetch the latest from GitHub so they get central improvements.
   // If GitHub is unreachable, fall back to the local copy shipped with the skill.
   const prompts = {};
-  const scriptDir = decodeURIComponent(new URL('.', import.meta.url).pathname);
-  const localPromptsDir = join(scriptDir, '..', 'prompts');
+  const localPromptsDir = join(SCRIPT_DIR, '..', 'prompts');
   const userPromptsDir = join(USER_DIR, 'prompts');
 
   for (const filename of PROMPT_FILES) {
@@ -135,15 +155,13 @@ async function main() {
     // Content to remix
     podcasts: feedPodcasts?.podcasts || [],
     x: feedX?.x || [],
-    blogs: feedBlogs?.blogs || [],
 
     // Stats for the LLM to reference
     stats: {
       podcastEpisodes: feedPodcasts?.podcasts?.length || 0,
       xBuilders: feedX?.x?.length || 0,
       totalTweets: (feedX?.x || []).reduce((sum, a) => sum + a.tweets.length, 0),
-      blogPosts: feedBlogs?.blogs?.length || 0,
-      feedGeneratedAt: feedX?.generatedAt || feedPodcasts?.generatedAt || feedBlogs?.generatedAt || null
+      feedGeneratedAt: feedX?.generatedAt || feedPodcasts?.generatedAt || null
     },
 
     // Prompts — the LLM reads these and follows the instructions
